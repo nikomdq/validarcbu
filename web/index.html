@@ -11,7 +11,81 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="jquery-3.2.0.js" type="text/javascript"></script>
         <script>
+            /**
+             * https://docs.google.com/spreadsheets/d/1UrK5D64Ye4Agu-SL3jGP83x5D68HPrfckXKyZ3Rnltg/edit?usp=sharing
+             * Fuente: Banco Central Argentino
+             */
             var cbu = function () {
+                this.bancos = [
+                    {"codigo": "005 ", "banco": "A.B.N. AMRO BANK N.V."},
+                    {"codigo": "007 ", "banco": "BANCO DE GALICIA Y BUENOS AIRES S.A."},
+                    {"codigo": "011 ", "banco": "BANCO DE LA NACIÓN ARGENTINA"},
+                    {"codigo": "014 ", "banco": "BANCO DE LA PROVINCIA DE BUENOS AIRES"},
+                    {"codigo": "015 ", "banco": "STANDARD BANK ARGENTINA S.A."},
+                    {"codigo": "016 ", "banco": "CITIBANK N.A."},
+                    {"codigo": "017 ", "banco": "BBVA BANCO FRANCÉS S.A."},
+                    {"codigo": "018 ", "banco": "THE BANK OF TOKYO - MITSUBISHI UFJ, LTD."},
+                    {"codigo": "020 ", "banco": "BANCO DE LA PROVINCIA DE CORDOBA S.A."},
+                    {"codigo": "027 ", "banco": "BANCO SUPERVIELLE S.A."},
+                    {"codigo": "029 ", "banco": "BANCO DE LA CIUDAD DE BUENOS AIRES"},
+                    {"codigo": "034 ", "banco": "BANCO PATAGONIA S.A."},
+                    {"codigo": "044 ", "banco": "BANCO HIPOTECARIO S.A."},
+                    {"codigo": "045 ", "banco": "BANCO DE SAN JUAN S.A."},
+                    {"codigo": "046 ", "banco": "BANCO DO BRASIL S.A."},
+                    {"codigo": "060 ", "banco": "BANCO DEL TUCUMAN S.A."},
+                    {"codigo": "065 ", "banco": "BANCO MUNICIPAL DE ROSARIO"},
+                    {"codigo": "072 ", "banco": "BANCO SANTANDER RIO S.A."},
+                    {"codigo": "079 ", "banco": "BANCO REGIONAL DE CUYO S.A."},
+                    {"codigo": "083 ", "banco": "BANCO DEL CHUBUT S.A."},
+                    {"codigo": "086 ", "banco": "BANCO DE SANTA CRUZ S.A."},
+                    {"codigo": "093 ", "banco": "BANCO DE LA PAMPA SOCIEDAD DE ECONOMÍA MIXTA"},
+                    {"codigo": "094 ", "banco": "BANCO DE CORRIENTES S.A."},
+                    {"codigo": "097 ", "banco": "BANCO PROVINCIA DEL NEUQUÉN S.A."},
+                    {"codigo": "147 ", "banco": "BANCO B. I. CREDITANSTALT S.A."},
+                    {"codigo": "150 ", "banco": "HSBC BANK ARGENTINA S.A."},
+                    {"codigo": "165 ", "banco": "J P MORGAN CHASE BANK, NATIONAL ASSOCIATION (SUCURSAL BUENOS AIRES)"},
+                    {"codigo": "191 ", "banco": "BANCO CREDICOOP COOPERATIVO LIMITADO"},
+                    {"codigo": "198 ", "banco": "BANCO DE VALORES S.A."},
+                    {"codigo": "247 ", "banco": "BANCO ROELA S.A."},
+                    {"codigo": "254 ", "banco": "BANCO MARIVA S.A."},
+                    {"codigo": "259 ", "banco": "BANCO ITAU BUEN AYRE S.A."},
+                    {"codigo": "262 ", "banco": "BANK OF AMERICA, NATIONAL ASSOCIATION"},
+                    {"codigo": "266 ", "banco": "BNP PARIBAS"},
+                    {"codigo": "268 ", "banco": "BANCO PROVINCIA DE TIERRA DEL FUEGO"},
+                    {"codigo": "269 ", "banco": "BANCO DE LA REPUBLICA ORIENTAL DEL URUGUAY"},
+                    {"codigo": "277 ", "banco": "BANCO SAENZ S.A."},
+                    {"codigo": "281 ", "banco": "BANCO MERIDIAN S.A."},
+                    {"codigo": "285 ", "banco": "BANCO MACRO S.A."},
+                    {"codigo": "293 ", "banco": "BANCO MERCURIO S.A."},
+                    {"codigo": "295 ", "banco": "AMERICAN EXPRESS BANK LTD. S.A."},
+                    {"codigo": "299 ", "banco": "BANCO COMAFI S.A."},
+                    {"codigo": "300 ", "banco": "BANCO DE INVERSION Y COMERCIO EXTERIOR S.A."},
+                    {"codigo": "301 ", "banco": "BANCO PIANO S.A."},
+                    {"codigo": "303 ", "banco": "BANCO FINANSUR S.A."},
+                    {"codigo": "305 ", "banco": "BANCO JULIO S.A."},
+                    {"codigo": "306 ", "banco": "BANCO PRIVADO DE INVERSIONES S.A."},
+                    {"codigo": "309 ", "banco": "NUEVO BANCO DE LA RIOJA S.A."},
+                    {"codigo": "310 ", "banco": "BANCO DEL SOL S.A."},
+                    {"codigo": "311 ", "banco": "NUEVO BANCO DEL CHACO S.A."},
+                    {"codigo": "312 ", "banco": "M.B.A. BANCO DE INVERSIONES S.A."},
+                    {"codigo": "315 ", "banco": "BANCO DE FORMOSA S.A."},
+                    {"codigo": "319 ", "banco": "BANCO CMF S.A."},
+                    {"codigo": "321 ", "banco": "BANCO DE SANTIAGO DEL ESTERO S.A."},
+                    {"codigo": "322 ", "banco": "NUEVO BANCO INDUSTRIAL DE AZUL S.A."},
+                    {"codigo": "325 ", "banco": "DEUTSCHE BANK S.A."},
+                    {"codigo": "330 ", "banco": "NUEVO BANCO DE SANTA FE S.A."},
+                    {"codigo": "331 ", "banco": "BANCO CETELEM ARGENTINA S.A."},
+                    {"codigo": "332 ", "banco": "BANCO DE SERVICIOS FINANCIEROS S.A."},
+                    {"codigo": "335 ", "banco": "BANCO COFIDIS S.A."},
+                    {"codigo": "336 ", "banco": "BANCO BRADESCO ARGENTINA S.A."},
+                    {"codigo": "338 ", "banco": "BANCO DE SERVICIOS Y TRANSACCIONES S.A."},
+                    {"codigo": "339 ", "banco": "RCI BANQUE"},
+                    {"codigo": "340 ", "banco": "BACS BANCO DE CREDITO Y SECURITIZACION S.A."},
+                    {"codigo": "341 ", "banco": "BANCO MASVENTAS S.A."},
+                    {"codigo": "386 ", "banco": "NUEVO BANCO DE ENTRE RIOS S.A."},
+                    {"codigo": "388 ", "banco": "NUEVO BANCO BISEL S.A."},
+                    {"codigo": "389 ", "banco": "BANCO COLUMBIA S.A."}];
+
 
                 this.validarLargoCBU = function (cbu) {
                     if (cbu.length !== 22) {
@@ -43,10 +117,20 @@ and open the template in the editor.
                     return parseInt(diferencia) === parseInt(digitoVerificador);
                 };
 
+                this.getBanco = function (cbu) {
+                    var bco = "";
+                    this.bancos.forEach(function (banco) {
+                        if (parseInt(banco.codigo) == parseInt(cbu.substr(0, 3))) {
+                            bco = banco.banco;
+                        }
+                    });
+                    return bco;
+                };
+
                 this.validarCBU = function (cbu, callback) {
                     var res = this.validarLargoCBU(cbu) && this.validarCodigoBanco(cbu.substr(0, 8)) && this.validarCuenta(cbu.substr(8, 14));
                     if (callback)
-                        callback(res);
+                        callback({respuesta: res, banco: this.getBanco(cbu)});
 
                     return res;
                 };
@@ -54,11 +138,11 @@ and open the template in the editor.
             };
 
             $(function () {
-                alert(new cbu().validarCBU("1910084155108400837003"));
+                new cbu().validarCBU("1910084155108400837003", function (data) {
+                    // ahora la funcion devuelve un json con 2 claves ( respuesta : true | false , banco : nombre del banco | "" }
+                    console.log(data);
+                });
             });
         </script>
     </head>
-    <body>
-
-    </body>
 </html>
