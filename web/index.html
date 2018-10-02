@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-3.2.0.js" type="text/javascript"></script>
+        <script>
+            var cbu = function () {
+
+                this.validarLargoCBU = function (cbu) {
+                    if (cbu.length !== 22) {
+                        return false;
+                    }
+                    return true;
+                };
+
+                this.validarCodigoBanco = function (codigo) {
+                    if (codigo.length !== 8) {
+                        return false;
+                    }
+                    var banco = codigo.substr(0, 3);
+                    var digitoVerificador1 = codigo[3];
+                    var sucursal = codigo.substr(4, 3);
+                    var digitoVerificador2 = codigo[7];
+                    var suma = banco[0] * 7 + banco[1] * 1 + banco[2] * 3 + digitoVerificador1 * 9 + sucursal[0] * 7 + sucursal[1] * 1 + sucursal[2] * 3;
+                    var diferencia = 10 - (suma % 10);
+                    return parseInt(diferencia) === parseInt(digitoVerificador2);
+                };
+
+                this.validarCuenta = function (cuenta) {
+                    if (cuenta.length !== 14) {
+                        return false;
+                    }
+                    var digitoVerificador = cuenta[13];
+                    var suma = cuenta[0] * 3 + cuenta[1] * 9 + cuenta[2] * 7 + cuenta[3] * 1 + cuenta[4] * 3 + cuenta[5] * 9 + cuenta[6] * 7 + cuenta[7] * 1 + cuenta[8] * 3 + cuenta[9] * 9 + cuenta[10] * 7 + cuenta[11] * 1 + cuenta[12] * 3;
+                    var diferencia = 10 - (suma % 10);
+                    return parseInt(diferencia) === parseInt(digitoVerificador);
+                };
+
+                this.validarCBU = function (cbu, callback) {
+                    var res = this.validarLargoCBU(cbu) && this.validarCodigoBanco(cbu.substr(0, 8)) && this.validarCuenta(cbu.substr(8, 14));
+                    if (callback)
+                        callback(res);
+
+                    return res;
+                };
+                return this;
+            };
+
+            $(function () {
+                alert(new cbu().validarCBU("1910084155108400837003"));
+            });
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
